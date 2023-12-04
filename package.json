@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "build": "node server"
   },
   "author": "",
   "license": "ISC",
@@ -19,8 +20,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.3",
     "multer": "^1.4.5-lts.1",
+    "netlify-lambda": "^2.0.16",
     "nodemon": "^3.0.1",
+    "serverless-http": "^3.2.0",
     "sharp": "^0.32.6",
-    "slugify": "^1.6.6"
+    "slugify": "^1.6.6",
+    "socket.io": "^4.7.2"
   }
 }

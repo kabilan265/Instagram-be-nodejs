@@ -1,8 +1,6 @@
 const asyncHandler = require('../middleware/async');
 const ErrResponse = require('../utils/ErrorResponse')
 const User = require('../modal/User')
-const fs=require('node:fs');
-const path = require('path')
 exports.getUserDetails = asyncHandler(async (req, res, next) => {
     const id = req.user.id;
     console.log(id)
@@ -43,7 +41,7 @@ exports.uploadUserImage = asyncHandler(async (req, res, next) => {
 exports.updateProfilePic = asyncHandler(async (req, res, next)=>{
     const id = req.user.id;
     const url = req.downloadURL;
-    const user = await User.findByIdAndUpdate(id, { profilePic: url }, { new: true });
+    const user = await User.findByIdAndUpdate(id, { profilePic: url }, { new: true }).select('profilePic');
     
     return res.status(200).json(user);
 })
