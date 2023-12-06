@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const serveless = require('serverless-http')
 const dotenv = require("dotenv")
 const connect = require('./config/db');
 const authRoute = require('./routes/Auth')
@@ -9,12 +8,12 @@ const cors = require('cors')
 const userRoute = require('./routes/User')
 const chatRoute = require('./routes/Chat')
 const messageRoute = require('./routes/Message')
-dotenv.config({ path: "./config/.env" })
-const port = process.env.port;
+/* dotenv.config({ path: "./config/.env" })
+ */const port = process.env.PORT;
 connect();
 app.use(express.json())
 app.use(cors());
-app.use('/.netlify/functions/api/user', userRoute)
+app.use('/.netlify/functions/api//user', userRoute)
 app.use('/.netlify/functions/api/auth', authRoute);
 app.use('/.netlify/functions/api/chat', chatRoute);
 app.use('/.netlify/functions/api/message', messageRoute)
@@ -62,4 +61,4 @@ io.on('connection', (socket) => {
         })
     })
 })
-module.exports.handler = serveless(app)
+
