@@ -13,10 +13,10 @@ const messageRoute = require('./routes/Message')
 connect();
 app.use(express.json())
 app.use(cors());
-app.use('/.netlify/functions/api//user', userRoute)
-app.use('/.netlify/functions/api/auth', authRoute);
-app.use('/.netlify/functions/api/chat', chatRoute);
-app.use('/.netlify/functions/api/message', messageRoute)
+app.use('/user', userRoute)
+app.use('/auth', authRoute);
+app.use('/chat', chatRoute);
+app.use('/message', messageRoute)
 
 app.use(errHandler);
 const server = app.listen(port, () => {
