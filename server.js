@@ -8,8 +8,8 @@ const cors = require('cors')
 const userRoute = require('./routes/User')
 const chatRoute = require('./routes/Chat')
 const messageRoute = require('./routes/Message')
-/* dotenv.config({ path: "./config/.env" })
- */const port = process.env.PORT;
+dotenv.config({ path: "./config/.env" })
+const port = process.env.PORT;
 connect();
 app.use(express.json())
 app.use(cors());

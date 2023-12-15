@@ -7,7 +7,7 @@ exports.accessChat = asyncHandler(async (req, res, next) => {
     const id = req.user.id;
     const { userId } = req.body;
     if (!userId) {
-        return next(new ErrResponse(`Please provide an userName in body`), 400)
+        return next(new ErrResponse(`Please provide an userName in body`,400))
     }
     let isChat = await Chat.findOne({
         isGroupChat: false,
@@ -21,14 +21,14 @@ exports.accessChat = asyncHandler(async (req, res, next) => {
         ]
     }).populate({
         path: "users",
-        select: "userName email"
+        select: "userName email profilePic"
     }).populate("lastMessage"/* {
         path: "lastMessage.sender",
         select: "userName email"
     } */);
     isChat = await User.populate(isChat, {
         path: "lastMessage.sender",
-        select: "userName email"
+        select: "userName email profilePic"
     })
     if (isChat) {
         return res.status(200).json(isChat)

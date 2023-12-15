@@ -34,14 +34,25 @@ exports.uploadUserImage = asyncHandler(async (req, res, next) => {
     const id = req.user.id;
     const url = req.downloadURL;
     const user = await User.findByIdAndUpdate(id, { $push: { photos: url } }, { new: true }).select('photos');
-    
-    return res.status(200).json(user);
+    return res.status(200).json(url);
 })
 
-exports.updateProfilePic = asyncHandler(async (req, res, next)=>{
+exports.updateProfilePic = asyncHandler(async (req, res, next) => {
     const id = req.user.id;
     const url = req.downloadURL;
     const user = await User.findByIdAndUpdate(id, { profilePic: url }, { new: true }).select('profilePic');
-    
+
     return res.status(200).json(user);
+})
+
+exports.getProfiles = asyncHandler(async (req, res, next) => {
+    const name = req.params.name;
+    if (!name) {
+        return next(new ErrResponse(`Please provide an name`), 400)
+    }
+    const users = await User.find(
+        { userName: { $regex: name, $options: "i" } },
+        { fullName: { $regex: name, $options: "i" } },
+    ).select("userName fullName profilePic")
+    return res.status(200).json(users);
 })

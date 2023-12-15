@@ -7,7 +7,9 @@ const {getStorage, ref  ,uploadBytesResumable , getDownloadURL} = require('fireb
 const firebase = initializeApp(firebaseConfig);
 const storage = getStorage();
 exports.uploadImage = asyncHandler(async (req, res, next) => {
-   
+   console.log("----------------------------")
+    console.log(req.file)
+    console.log('firebase start->',Date.now())
     const metaData = {
         contentType: req.file.mimetype,
     };
@@ -37,6 +39,7 @@ exports.uploadImage = asyncHandler(async (req, res, next) => {
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 req.downloadURL = downloadURL;
+                console.log('firebase end->',Date.now())
                 next();
             }).catch(()=>{
                 return next(new ErrResponse(`Server error while uploading images`), 500);
