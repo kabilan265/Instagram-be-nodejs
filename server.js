@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
-const dotenv = require("dotenv")
-const connect = require('./config/db');
+/* const dotenv = require("dotenv")
+ */const connect = require('./config/db');
 const authRoute = require('./routes/Auth')
 const errHandler = require('./middleware/Error');
 const cors = require('cors')
 const userRoute = require('./routes/User')
 const chatRoute = require('./routes/Chat')
 const messageRoute = require('./routes/Message')
-dotenv.config({ path: "./config/.env" })
+/* dotenv.config({ path: "./config/.env" }) */
 const port = process.env.PORT;
 connect();
 app.use(express.json())
